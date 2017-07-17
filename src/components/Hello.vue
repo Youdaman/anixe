@@ -1,5 +1,10 @@
 <template>
   <div class="hello">
+
+    <b-field label="Name">
+      <b-input value="John Silver"></b-input>
+    </b-field>
+
     <b-table
       :data="tableData">
 
@@ -10,7 +15,7 @@
           </b-table-column>
 
           <b-table-column field="description" label="Description">
-              {{ props.row.description }}
+              {{ props.row.description | truncate(50) }}
           </b-table-column>
 
           <b-table-column field="pax" label="Passengers" sortable>
@@ -46,9 +51,10 @@ import data from '../data.json'
 
 export default {
   name: 'hello',
-  data () {
-    return {
-      tableData: data
+  computed: {
+    tableData () {
+      var ships = data
+      return ships
     }
   }
 }
